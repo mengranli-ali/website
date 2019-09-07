@@ -1,0 +1,11 @@
+spring:
+  thymeleaf:
+    mode: HTML
+  profiles:
+    active: dev
+
+server:
+  port: 80
+
+
+comment.avatar: /images/joe.jpeg

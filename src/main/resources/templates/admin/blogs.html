@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="admin/_fragments :: head(~{::title})">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Management</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <link rel="stylesheet" href="../../static/css/me.css">
+</head>
+<body>
+
+<!--导航-->
+<nav th:replace="admin/_fragments :: menu(1)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small">
+    <div class="ui container">
+        <div class="ui inverted secondary stackable menu">
+            <h2 class="ui teal header item">Blog Management</h2>
+            <a href="#" class="active m-item item m-mobile-hide"><i class="mini home icon"></i>Blog</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="mini sitemap icon"></i>Categories</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="mini tags icon"></i>Tags</a>
+            <div class="right m-item m-mobile-hide menu">
+                <div class="ui dropdown item">
+                    <div class="text">
+                        <img src="../static/images/alicia.jpeg" th:src="@{images/alicia.jpeg}" class="ui avatar image" />
+                        Mengran Li
+                    </div>
+                    <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <a href="#" class="item">Log out</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="#" class="ui menu toggle black icon button m-right-top m-mobile-show">
+        <i class="sidebar icon"></i>
+    </a>
+</nav>
+<!--二级导航-->
+<div class="ui attached pointing menu">
+    <div class="ui container">
+        <div class="right menu">
+            <a href="#" th:href="@{/admin/blogs/input}" class="item">Publish</a>
+            <a href="#" th:href="@{/admin/blogs}" class="active teal item">Lists</a>
+        </div>
+    </div>
+</div>
+
+
+<!--中间内容-->
+<div class="m-container-small m-padded-tb-big">
+    <div class="ui container">
+        <div method="post" class="ui secondary segment form">
+            <input type="hidden" name="page">
+            <div class="inline fields">
+                <!--field 1-->
+                <div class="field">
+                    <input type="text" name="title" placeholder="Title">
+                </div>
+                <!--field 2-->
+                <div class="field">
+                    <div class="ui labeled action input">
+                        <div class="ui type selection dropdown">
+                            <input type="hidden" name="typeId">
+                            <i class="dropdown icon"></i>
+                            <div class="default text">Categories</div>
+                            <div class="menu">
+                                <div th:each="type : ${types}" class="item" data-value="1" th:data-value="${type.id}" th:text="${type.name}">Font-end</div>
+                                <!--/*-->
+                                <div class="item" data-value="2">Back-end</div>
+                                <div class="item" data-value="3">Data Analysis</div>
+                                <div class="item" data-value="4">To-do List</div>
+                                <div class="item" data-value="5">Problems</div>
+                                <!--*/-->
+                            </div>
+                        </div>
+                    </div>
+                    <button id="clear-btn" class="ui compact button">clear</button>
+                </div>
+                <!--field 3-->
+                <div class="field">
+                    <div class="ui checkbox">
+                        <input type="checkbox" id="recommend" name="recommend">
+                        <label for="recommend">Recommend</label>
+                    </div>
+                </div>
+                <!--field 4-->
+                <div class="field">
+                    <button type="button" id="search-btn" class="ui mini teal basic button"><i class="search icon"></i>Search</button>
+                </div>
+
+            </div>
+        </div>
+
+        <!--Main table-->
+        <div id="table-container">
+            <table th:fragment="blogList" class="ui compact teal table">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>Title</th>
+                    <th>Category</th>
+                    <th>Recommend</th>
+                    <th>Status</th>
+                    <th>Updated Time</th>
+                    <th>Operation</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="blog, iterStat : ${page.content}">
+                    <td th:text="${iterStat.count}">1</td>
+                    <td th:text="${blog.title}">How to start coding java?</td>
+                    <td th:text="${blog.type.name}">Back-end</td>
+                    <td th:text="${blog.recommend} ? 'Yes': 'No' ">Yes</td>
+                    <td th:text="${blog.published} ? 'Published': 'Draft' ">Draft</td>
+                    <td th:text="${blog.updateTime}">03-04-2019 09:45</td>
+                    <td>
+                        <a href="#" th:href="@{/admin/blogs/{id}/input(id=${blog.id})}" class="item">Edit</a>
+                        <a href="#" th:href="@{/admin/blogs/{id}/delete(id=${blog.id})}" class="active teal item">Delete</a>
+                    </td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <th colspan="7">
+                        <div class="ui mini pagination menu" th:if="${page.totalPages}>1">
+                            <a onclick="page(this)" th:attr="data-page=${page.number}-1" class="item"
+                               th:unless="${page.first}">Previous</a>
+                            <a onclick="page(this)" th:attr="data-page=${page.number}+1" class="item"
+                               th:unless="${page.last}">Next</a>
+                        </div>
+                        <a href="#" th:href="@{/admin/blogs/input}"
+                           class="ui mini right floated teal basic button">Add</a>
+                    </th>
+                </tr>
+                </tfoot>
+            </table>
+
+            <div class="ui success message" th:unless="${#strings.isEmpty(message)}">
+                <i class="close icon"></i>
+                <div class="header">Reminder:</div>
+                <p th:text="${message}">Congrats!Operation succeeds!</p>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<br>
+<br>
+
+
+<!--底部footer-->
+<footer th:replace="admin/_fragments :: footer" class="ui inverted vertical segment m-padded-tb-massive">
+    <div class="ui center aligned container">
+        <div class="ui inverted divided stackable grid">
+            <div class="three wide column">
+                <div class="ui inverted link list">
+                    <div class="item">
+                        <img src="../../static/images/Wechat.jpeg" th:src="@{images/Wechat.jpeg}" class="ui rounded image" alt="" style="width: 100px"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="three wide column">
+                <h4 class="ui inverted header">Latest blog</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item">User stories</a>
+                    <a href="#" class="item">User stories</a>
+                    <a href="#" class="item">User stories</a>
+                </div>
+            </div>
+            <div class="three wide column">
+                <h4 class="ui inverted header">Contact me</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item">Email: limengran257@gmail.com</a>
+                    <a href="#" class="item">Wechat: alice_257mrl</a>
+                </div>
+            </div>
+            <div class="seven wide column">
+                <h4 class="ui inverted header">Mengran LI</h4>
+                <p class="m-text-thin m-text-spaced m-opacity-mini">Hi! I am Mengran Li, a junior Java Developer
+                    from
+                    China.</p>
+                <p class="m-text-thin m-text-spaced m-opacity-tiny">Feel free to contact me :)</p>
+            </div>
+        </div>
+        <div class="ui inverted section divider"></div>
+        <p class="m-text-thin m-text-spaced m-opacity-mini">Copyright©2019 Designed by Mengran LI</p>
+    </div>
+</footer>
+
+
+<!--/*/<th:block th:replace="admin/_fragments :: script">/*/-->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+<!--/*/</th:block>/*/-->
+
+
+<script>
+    $('.menu.toggle').click(function () {
+        $('.m-item').toggleClass('m-mobile-hide');
+    });
+
+    $('.ui.dropdown').dropdown({
+        on: 'hover'
+    });
+
+    //消息提示关闭的初始化
+    $('.message .close')
+        .on('click', function () {
+            $(this)
+                .closest('.message')
+                .transition('fade');
+        });
+
+    $('#clear-btn')
+        .on('click',function(){
+            $('.ui.type.dropdown')
+                .dropdown('clear')
+            ;
+
+            $("[name='title']").val('');
+
+        });
+
+    function page(obj) {
+        $("[name='page']").val($(obj).data("page"));
+        loaddata();
+    }
+
+    $("#search-btn").click(function () {
+        $("[name='page']").val(0);
+        loaddata();
+    });
+
+    function loaddata() {
+        $("#table-container").load(/*[[@{/admin/blogs/search}]]*/"/admin/blogs/search", {
+            title: $("[name='title']").val(),
+            typeId: $("[name='typeId']").val(),
+            recommend: $("[name='recommend']").prop('checked'),
+            page: $("[name='page']").val()
+        });
+    }
+
+</script>
+
+
+</body>
+</html>

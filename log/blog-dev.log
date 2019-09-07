@@ -1,0 +1,3 @@
+2019-07-22 11:45:09.983  INFO 5057 --- [Thread-30] ationConfigEmbeddedWebApplicationContext : Closing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@4b8856df: startup date [Sat Jul 20 21:40:07 CST 2019]; root of context hierarchy
+2019-07-22 11:45:10.261  INFO 5057 --- [Thread-30] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown
+2019-07-22 11:45:10.277  INFO 5057 --- [Thread-30] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'

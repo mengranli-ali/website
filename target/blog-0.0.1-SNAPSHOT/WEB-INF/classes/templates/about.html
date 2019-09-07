@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="_fragments :: head(~{::title})">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About me</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <link rel="stylesheet" href="../static/css/me.css">
+</head>
+<body>
+
+<!--导航-->
+<nav th:replace="_fragments :: menu(4)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small">
+    <div class="ui container">
+        <div class="ui inverted secondary stackable menu">
+            <h2 class="ui teal header item">Mengran's Dev Blog</h2>
+            <a href="#" class="m-item item m-mobile-hide"><i class="mini home icon"></i>Homepage</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="mini sitemap icon"></i>Categories</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="mini clone icon"></i>Archive</a>
+            <a href="#" class="active m-item item m-mobile-hide"><i class="mini smile outline icon"></i>About me</a>
+            <div class="right item m-mobile-hide">
+                <div class="ui icon inverted transparent input">
+                    <input type="text" placeholder="Search....">
+                    <i class="search link icon"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="#" class="ui menu toggle black icon button m-right-top m-mobile-show">
+        <i class="sidebar icon"></i>
+    </a>
+</nav>
+
+<!--中间内容-->
+<div class="m-container m-padded-tb-big">
+    <div class="ui container">
+
+        <div class="ui stackable grid">
+            <div class="ui eleven wide column">
+                <div class="ui segment">
+                    <img src="../static/images/Aboutme.JPEG" alt="" class="ui rounded image" th:src="@{images/Aboutme.JPEG}" />
+                </div>
+            </div>
+
+            <div class="ui five wide column">
+                <div class="ui top attached segment">
+                    <div class="ui header">About me</div>
+                </div>
+                <div class="ui attached segment">
+                    <p class="m-text-thin">Mengran Li, an independent Java developer.</p>
+                    <p class="m-text-thin">Focus on Java Web, Data Analysis and Visualisation.</p>
+                    <p class="m-text-thin">Keep learning and never stop.</p>
+                </div>
+                <div class="ui attached segment">
+                    <div class="ui orange basic left pointing label">Coding</div>
+                    <div class="ui light green basic left pointing label">Cycling</div>
+                    <div class="ui blue basic left pointing label">Piano</div>
+                </div>
+                <div class="ui attached segment">
+                    <div class="ui teal basic left pointing label m-margin-tb-tiny">Java</div>
+                    <div class="ui teal basic left pointing label m-margin-tb-tiny">Spring</div>
+                    <div class="ui teal basic left pointing label m-margin-tb-tiny">Hibernate</div>
+                    <div class="ui teal basic left pointing label m-margin-tb-tiny">Python</div>
+                    <div class="ui teal basic left pointing label m-margin-tb-tiny">MySQL</div>
+                    <div class="ui teal basic left pointing label m-margin-tb-tiny">...</div>
+                </div>
+                <div class="ui bottom attached segment">
+                    <a href="https://github.com/aliciali1027" target="_blank" class="ui circular icon button"><i class="github icon"></i></a>
+                    <a href="https://www.linkedin.com/in/mengran-alicia-li/" target="_blank" class="ui circular icon button"><i  class="linkedin icon"></i></a>
+                    <a href="https://www.weibo.com/p/1005055680289603/home?from=page_100505&mod=TAB&is_all=1#place" target="_blank" class="ui circular icon button"><i class="weibo icon"></i></a>
+                    <a href="#" class="ui myWechat circular icon button"><i class="wechat icon"></i></a>
+                    <a href="#" class="ui myQQ circular icon button" data-content="472224236" data-title="Add my QQ number:"><i class="qq icon"></i></a>
+                </div>
+
+                <div class="ui wechat-qr flowing popup transition hidden">
+                    <img src="../static/images/Wechat.jpeg" th:src="@{images/Wechat.jpeg}" alt="" class="ui rounded image" style="width: 100px">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br>
+<br>
+
+
+<!--底部footer-->
+<footer th:replace="_fragments :: footer" class="ui inverted vertical segment m-padded-tb-massive">
+    <div class="ui center aligned container">
+        <div class="ui inverted divided stackable grid">
+            <div class="three wide column">
+                <div class="ui inverted link list">
+                    <div class="item">
+                        <img src="../static/images/Wechat.jpeg" th:src="@{images/Wechat.jpeg}" class="ui rounded image" alt="" style="width: 100px">
+                    </div>
+                </div>
+            </div>
+
+            <div class="three wide column">
+                <h4 class="ui inverted header">Latest blog</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item">User stories</a>
+                    <a href="#" class="item">User stories</a>
+                    <a href="#" class="item">User stories</a>
+                </div>
+            </div>
+            <div class="three wide column">
+                <h4 class="ui inverted header">Contact me</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item">Email: limengran257@gmail.com</a>
+                    <a href="#" class="item">Wechat: alice_257mrl</a>
+                </div>
+            </div>
+            <div class="seven wide column">
+                <h4 class="ui inverted header">Mengran LI</h4>
+                <p class="m-text-thin m-text-spaced m-opacity-mini">Hi! I am Mengran Li, a junior Java Developer
+                    from
+                    China.</p>
+                <p class="m-text-thin m-text-spaced m-opacity-tiny">Feel free to contact me :)</p>
+            </div>
+        </div>
+        <div class="ui inverted section divider"></div>
+        <p class="m-text-thin m-text-spaced m-opacity-mini">Copyright©2019 Designed by Mengran LI</p>
+    </div>
+</footer>
+
+
+<!--/*/<th:block th:replace="_fragments :: script">/*/-->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+<!--/*/</th:block>/*/-->
+
+<script>
+    $('.menu.toggle').click(function () {
+        $('.m-item').toggleClass('m-mobile-hide');
+    });
+
+    $('.myWechat').popup({
+        popup: $('.wechat-qr'),
+        position: 'bottom center'
+    });
+
+    $('.myQQ').popup();
+
+</script>
+
+
+</body>
+</html>
