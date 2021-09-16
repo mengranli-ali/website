@@ -1,4 +1,4 @@
-# Website
+# Personal Website
 
 ## Introduction
-A website using Java, Spring Boot. 
+A personal website created by Java, Spring Boot. 
